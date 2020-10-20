@@ -1,7 +1,13 @@
 import React from 'react';
+import ExpenseList from './ExpenseList';
+import ExpenseListFilter from './ExpenseListFilter';
 
 const Home =()=>(
-    <h1>home page</h1>
+    <div>
+    <ExpenseListFilter />
+    <ExpenseList />
+    </div>
+    
 )
    
 
