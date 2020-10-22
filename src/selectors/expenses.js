@@ -11,7 +11,7 @@ export const getVisibileExpenses =(expenses,{text,sortBy,startDate,endDate})=>{
     }).sort((a,b)=>{
       if(sortBy==='date'){
           return a.createdAt < b.createdAt ? 1:-1
-      } else if(sortBy==='date'){
+      } else if(sortBy==='amount'){
           return a.amount < b.amount ? 1: -1
       }
     })
