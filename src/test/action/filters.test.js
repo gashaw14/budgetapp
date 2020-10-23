@@ -31,10 +31,10 @@ test('should setup start date',()=>{
 });
 
 test('should setup end date',()=>{
-    const action = setEndDate(moment());
+    const action = setEndDate(moment(0));
     expect(action).toEqual({
         type:'SET_END_DATE',
-        endDate: moment()
+        endDate: moment(0)
     });
 });
 
