@@ -4,8 +4,10 @@ import AppRouter from './router/AppRouter';
 import {ConfigStore} from './store/configStore';
 import {getVisibileExpenses} from './selectors/expenses';
 import {addExpense} from './actions/expenses';
-import {setTextFilter} from './actions/filters';
 import { Provider } from 'react-redux';
+import 'normalize.css/normalize.css';
+import 'react-dates/lib/css/_datepicker.css';
+
 
 
 const store = ConfigStore();
