@@ -1,5 +1,6 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 if (process.env.NODE_ENV === 'test'){
  require('dotenv').config({path: '.env.test'})
@@ -43,7 +44,18 @@ module.exports = (env) => {
       }]
     },
     plugins: [
-      CSSExtract
+      CSSExtract,
+      new webpack.DefinePlugin({
+        'process.env.FIREBASE_API': JSON.stringify(process.env.FIREBASE_API),
+        'process.env.FIREBASE_AUTH': JSON.stringify(process.env.FIREBASE_AUTH),
+        'process.env.FIREBASE_DATABASE_URL': JSON.stringify(process.env.FIREBASE_DATABASE_URL),
+        'process.env.FIREBASE_PROJECT_ID': JSON.stringify(process.env.FIREBASE_PROJECT_ID),
+        'process.env.FIREBASE_STORAGE_BUCKET': JSON.stringify(process.env.FIREBASE_STORAGE_BUCKET),
+        'process.env.FIREBASE_MESSAGING_SENDER_ID': JSON.stringify(process.env.FIREBASE_MESSAGING_SENDER_ID),
+        'process.env.FIREBASE_APP_ID': JSON.stringify(process.env.FIREBASE_APP_ID),
+        'process.env.FIREBASE_MEASUREMENT_ID': JSON.stringify(process.env.FIREBASE_MEASUREMENT_ID)
+
+      })
     ],
     devtool: isProduction ? 'source-map' : 'inline-source-map',
     devServer: {
