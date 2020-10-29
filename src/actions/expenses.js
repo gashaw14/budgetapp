@@ -52,3 +52,45 @@ export const startAddExpense = (expenseData={})=>{
         update
     }
     }
+
+    //SET_EXPENSE
+   export const setExpenses = (expenses)=>{
+     return{
+       type:'SET_EXPENSES',
+       expenses
+     }
+    }
+
+    //fetch all expense data once
+    // parse that data into an array
+    //dispatch SET_EXPENSES
+  
+ export  const startSetExpenses = ()=>{
+   return (dispatch)=>{
+
+     return database.ref('expenses').once('value').then((snapshot)=>{
+       const expenses = []
+       snapshot.forEach((childSnapshot)=>{
+       expenses.push({
+           id: childSnapshot.key,
+           ...childSnapshot.val()
+         });
+
+       })
+
+       dispatch(setExpenses(expenses));
+      })
+   }
+    }
+
+// database.ref('expenses').once('value')
+// .then((snapshot)=>{
+// const expenses = [];
+// snapshot.forEach((childSnapshot)=>{
+// expenses.push({
+//   id: childSnapshot.key,
+//   ...childSnapshot.val()
+// });
+// })
+// console.log(expenses);
+// });
