@@ -10,8 +10,6 @@ const Home =()=>(
     <ExpenseList />
     </div>
     
-)
+);
    
-
-
 export default Home;
