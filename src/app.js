@@ -48,4 +48,13 @@ firebase.auth().onAuthStateChanged((user)=>{
     renderApp();
     history.push('/');
     }
-});
+})
+
+
+
+//upgrading this app
+// add confirmation modal when removing expenses
+//show number of hidden expenses in/dashboard summary
+// add support for another social login system (facebook or twitter)
+
+

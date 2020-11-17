@@ -4,8 +4,9 @@ import ExpenseForm from './ExpenseForm';
 import { startEditExpense, startRemoveExpense } from '../actions/expenses';
 import Modal from 'react-modal';
 
-
+Modal.setAppElement('#app');
 export class EditExpensePage extends React.Component {
+    
     state = {
         modalOpen: false
     }
