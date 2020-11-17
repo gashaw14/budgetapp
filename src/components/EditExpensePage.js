@@ -2,19 +2,40 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ExpenseForm from './ExpenseForm';
 import { startEditExpense, startRemoveExpense } from '../actions/expenses';
+import Modal from 'react-modal';
+
 
 export class EditExpensePage extends React.Component {
+    state = {
+        modalOpen: false
+    }
+    delete = () => {
+        this.setState(() => ({
+            modalOpen: false
+        }))
+        this.props.startRemoveExpense({ id: this.props.expense.id });
+        this.props.history.push('/dashboard');
+    }
+
+    noDelete = () => {
+        this.setState(() => ({
+            modalOpen: false
+        }))
+        this.props.history.push('/dashboard');
+    }
     onSubmit = (expense) => {
         this.props.startEditExpense(this.props.expense.id, expense);
         this.props.history.push('/dashboard');
     }
 
     onRemove = () => {
-        this.props.startRemoveExpense({ id: this.props.expense.id });
-        this.props.history.push('/dashboard');
+        this.setState(() => ({
+            modalOpen: true
+        }))
 
+        // this.props.startRemoveExpense({ id: this.props.expense.id });
+        // this.props.history.push('/dashboard');
     }
-
     render() {
         return (
             <div >
@@ -29,8 +50,24 @@ export class EditExpensePage extends React.Component {
                         onSubmit={this.onSubmit}
                     />
                     <button className="button button--secondary" onClick={this.onRemove}>Remove Expense</button>
+
                 </div>
-            </div>
+                
+    
+                    <Modal
+                        isOpen={this.state.modalOpen}
+                        onRequestClose={this.delete || this.noDelete}
+                        closeTimeoutMS={200}
+                        className="modal"
+
+                    >
+                        <p className="modal__title">Are you sure to delete your expense?</p>
+                        <button className=" button button--modal" onClick={this.noDelete}>No</button>
+                        <button className="button button--modal" onClick={this.delete}>Yes</button>
+                    </Modal>
+                   
+                   
+                </div>
 
         )
     }
@@ -38,7 +75,7 @@ export class EditExpensePage extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        startEditExpense: (id, expense) => dispatch(startEditExpense(id, expense)),
+                    startEditExpense: (id, expense) => dispatch(startEditExpense(id, expense)),
         startRemoveExpense: (data) => dispatch(startRemoveExpense(data))
 
     }
@@ -47,7 +84,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state, props) => {
     return {
-        expense: state.expenses.find((expense) => expense.id === props.match.params.id)
+                    expense: state.expenses.find((expense) => expense.id === props.match.params.id)
     }
 }
 

@@ -5,7 +5,7 @@ import numeral from 'numeral';
 import { getVisibileExpenses } from '../selectors/expenses';
 import expensesTotal from '../selectors/Expenses-total';
 
-export const ExpensesSummary = ({ expenseCount, amountCount }) => {
+export const ExpensesSummary = ({ expenseCount, amountCount, hiddenCount }) => {
     const expenseWord = expenseCount === 1 ? 'expense' : 'expenses'
     const dollar = numeral(amountCount / 100).format('$0,0.00');
     return (
@@ -22,10 +22,12 @@ export const ExpensesSummary = ({ expenseCount, amountCount }) => {
 
 const mapSateToProps = (state) => {
     const visibleExpenses = getVisibileExpenses(state.expenses, state.filters);
+    
 
     return {
         expenseCount: visibleExpenses.length,
         amountCount: expensesTotal(visibleExpenses)
+        
     }
 }
 
